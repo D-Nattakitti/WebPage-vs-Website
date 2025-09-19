@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebPage vs Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 140px);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .side {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .webpage-title {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .website-title {
+            background: linear-gradient(45deg, #4834d4, #686de0);
+        }
+
+        .description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid;
+        }
+
+        .webpage .description {
+            border-left-color: #ff6b6b;
+        }
+
+        .website .description {
+            border-left-color: #4834d4;
+        }
+
+        .demo-area {
+            flex: 1;
+            border: 3px dashed #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: #f7fafc;
+        }
+
+        /* WebPage Demo */
+        .simple-page {
+            width: 90%;
+            max-width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .simple-page:hover {
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+
+        .simple-page h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .simple-page p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .click-message {
+            position: absolute;
+            bottom: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .click-message.show {
+            opacity: 1;
+        }
+
+        /* Website Demo */
+        .website-demo {
+            width: 90%;
+            max-width: 350px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .website-nav {
+            background: #4834d4;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .website-content {
+            padding: 25px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-section {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h3 {
+            color: #4834d4;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .features {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .features h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features li {
+            color: #424242;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .side-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>WebPage vs Website</h1>
+        <p>เรียนรู้ความแตกต่างระหว่าง WebPage (หน้าเว็บเดียว) และ Website (เว็บไซต์ที่มีหลายหน้า) ผ่านการทดลองใช้งานจริง</p>
+    </div>
+
+    <div class="container">
+        <!-- WebPage Side -->
+        <div class="side webpage">
+            <div class="side-title webpage-title">WebPage</div>
+            
+            <div class="description">
+                <h4>หน้าเว็บเดียว (Single Web Page)</h4>
+                <p><strong>WebPage</strong> คือ เอกสารเดียวที่แสดงผลบนเว็บเบราว์เซอร์ มีเนื้อหาคงที่ และมักจะมีข้อมูลเฉพาะเรื่องใดเรื่องหนึ่ง เช่น บทความ ข่าว หรือข้อมูลผลิตภัณฑ์</p>
+            </div>
+
+            <div class="demo-area">
+                <div class="simple-page" onclick="showClickMessage()">
+                    <h3>บทความเรื่อง "การเรียน HTML"</h3>
+                    <p>นี่คือตัวอย่างของ WebPage ที่มีเนื้อหาเดียว คุณสามารถคลิกได้ แต่จะไม่มีการเปลี่ยนแปลงหน้า เพราะเป็นหน้าเดียวเท่านั้น</p>
+                </div>
+                <div class="click-message" id="clickMessage">คลิกแล้ว! แต่ยังอยู่หน้าเดียว</div>
+            </div>
+
+            <div class="features">
+                <h4>คุณสมบัติของ WebPage:</h4>
+                <ul>
+                    <li>มีเนื้อหาเดียว</li>
+                    <li>ไม่มีการนำทางระหว่างหน้า</li>
+                    <li>โหลดเร็ว</li>
+                    <li>เหมาะสำหรับข้อมูลเฉพาะเรื่อง</li>
+                    <li>URL เดียว</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Website Side -->
+        <div class="side website">
+            <div class="side-title website-title">Website</div>
+            
+            <div class="description">
+                <h4>เว็บไซต์ (Complete Website)</h4>
+                <p><strong>Website</strong> คือ ชุดของหลาย ๆ WebPage ที่เชื่อมโยงกันภายใต้โดเมนเดียวกัน มีระบบนำทาง และสามารถแสดงเนื้อหาที่หลากหลายได้</p>
+            </div>
+
+            <div class="demo-area">
+                <div class="website-demo">
+                    <div class="website-nav">
+                        <div class="nav-item active" onclick="showContent('home')">หน้าแรก</div>
+                        <div class="nav-item" onclick="showContent('about')">เกี่ยวกับ</div>
+                        <div class="nav-item" onclick="showContent('service')">บริการ</div>
+                        <div class="nav-item" onclick="showContent('contact')">ติดต่อ</div>
+                    </div>
+                    <div class="website-content">
+                        <div class="content-section active" id="home">
+                            <h3>หน้าแรก</h3>
+                            <p>ยินดีต้อนรับสู่เว็บไซต์ของเรา! นี่คือหน้าแรกที่แสดงข้อมูลทั่วไป</p>
+                        </div>
+                        <div class="content-section" id="about">
+                            <h3>เกี่ยวกับเรา</h3>
+                            <p>เราเป็นบริษัทที่มีประสบการณ์ในการพัฒนาเว็บไซต์มากว่า 10 ปี</p>
+                        </div>
+                        <div class="content-section" id="service">
+                            <h3>บริการของเรา</h3>
+                            <p>เรามีบริการออกแบบเว็บไซต์, พัฒนาแอพ และให้คำปรึกษาด้าน IT</p>
+                        </div>
+                        <div class="content-section" id="contact">
+                            <h3>ติดต่อเรา</h3>
+                            <p>โทร: 02-xxx-xxxx<br>อีเมล: info@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <h4>คุณสมบัติของ Website:</h4>
+                <ul>
+                    <li>มีหลายหน้า (Multiple Pages)</li>
+                    <li>มีระบบนำทาง (Navigation)</li>
+                    <li>เนื้อหาหลากหลาย</li>
+                    <li>มีโครงสร้างที่ซับซ้อน</li>
+                    <li>หลาย URL ภายใต้โดเมนเดียว</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showClickMessage() {
+            const message = document.getElementById('clickMessage');
+            message.classList.add('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 2000);
+        }
+
+        function showContent(section) {
+            // Hide all content sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.classList.remove('active'));
+            
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(section).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
